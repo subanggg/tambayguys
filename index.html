@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambay? 🛋️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #2c3e50;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.3em;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #taraBtn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        #taraBtn:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        #passBtn {
+            background: #3498db;
+            color: white;
+        }
+
+        #passBtn:hover {
+            background: #2980b9;
+        }
+
+        .messages {
+            font-size: 1.5em;
+            margin: 20px 0;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .messages.show {
+            opacity: 1;
+        }
+
+        .success {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #27ae60;
+            padding: 40px 30px;
+            border-radius: 15px;
+            font-size: 2em;
+            text-align: center;
+            display: none;
+        }
+
+        .emoji {
+            font-size: 3em;
+            margin-top: 15px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tambay? 🛋️</h1>
+        
+        <div class="buttons">
+            <button id="taraBtn">Tara! 🚀</button>
+            <button id="passBtn">Pass 🙅‍♂️</button>
+        </div>
+        
+        <div class="messages" id="messages"></div>
+    </div>
+
+    <div class="success" id="successMsg">
+        <div>Yownn! Chat ka na sa GC!</div>
+        <div class="emoji">😍✨</div>
+    </div>
+
+    <script>
+        const taraBtn = document.getElementById('taraBtn');
+        const passBtn = document.getElementById('passBtn');
+        const messages = document.getElementById('messages');
+        const successMsg = document.getElementById('successMsg');
+        const container = document.querySelector('.container');
+
+        const persuasions = [
+            "Please...",
+            "Sige naaa...",
+            "Dalanggg",
+            "Tara naaa ",
+            "Tatambay tayooo",
+            "Tambay naaa plsss",
+            "Katamad sa bahay tambayyy naaa",
+            "Last chance tara na",
+            "Hala wag ganun, tara na",
+            "Tambay naa??"
+        ];
+
+        let passCount = 0;
+        let persuasionIndex = 0;
+
+        passBtn.addEventListener('click', () => {
+            passCount++;
+            taraBtn.style.transform = `scale(${1 + passCount * 0.15})`;
+            taraBtn.style.fontSize = `${1.3 + passCount * 0.08}em`;
+            
+            if (persuasionIndex < persuasions.length) {
+                messages.textContent = persuasions[persuasionIndex];
+                messages.classList.add('show');
+                persuasionIndex++;
+                
+                setTimeout(() => {
+                    messages.classList.remove('show');
+                }, 2000);
+            }
+            
+            passBtn.style.transform = `scale(${1 - passCount * 0.03})`;
+            passBtn.style.opacity = Math.max(0.4, 1 - passCount * 0.04);
+        });
+
+        taraBtn.addEventListener('click', () => {
+            container.classList.add('hidden');
+            successMsg.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
